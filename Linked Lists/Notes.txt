@@ -1,0 +1,56 @@
+Linked lists come in two forms
+	Single linked
+	double linked
+
+Basically they are a set of nodes that store data for the upcoming connection (singly) or they store data for the previous node as well (double)
+
+Head- the first node in link, we always have to hold a reference to this node. 
+Tail- the last node in link
+Pointers- all nodes hold this to point to either next or (both) previous node.
+
+We hold the nodes as classes or structs
+
+Why use either?
+single - less memory because stores only one pointer to next, also easier implementation
+BUT cannot access previous element
+
+
+double - you can move backwards in a list
+BUT takes more memory
+
+
+ POINTER CREATED IS A TRANVERSING POINTER
+logic to adding linked to single linked list
+create a pointer to point to head
+move the pointer to n-1 of the area we want to inject
+create next node
+make new node point to previous n and the n-1 node point to new node
+done
+
+logic to adding to double linked list
+create a pointer to point to head
+move the pointer to n-1 of the area we want to inject
+create next node
+point new node next to old n
+point new node before to n-1 node
+change old n prev point to new node
+change n-1 node next node to new.
+done
+
+deleting from single link
+create 2 pointers at head
+move the pointers to sandwich the node of removal
+have the node of n-1 point to second pointer at n+1
+clear memory out of removed node
+
+delete from double link
+create a pointer at head
+move the pointer to node fo removal
+set n-1 next pointer to n+1 and the n+1 previous pointer to n-1
+clear the node
+
+
+Complexity is pretty efficient and fast, mainly constant and linear
+
+
+
