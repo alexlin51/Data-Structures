@@ -11,9 +11,9 @@ public:
 
 	Stack(); // creation of a list for stack
 	void pop();
-	void push(int data);
+	void push(string data);
 	void viewStack();
-	void stackSize();
+	int stackSize();
 
 };
 

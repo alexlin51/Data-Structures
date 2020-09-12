@@ -13,14 +13,15 @@ void Stack::pop() {
 	this->stackList.DelEnd();
 }
 
-void Stack::push(int data) {
-	this->stackList.AddEnd(data);
+void Stack::push(string input) {
+	this->stackList.AddEnd(input);
 }
 
 void Stack::viewStack() {
 	this->stackList.ViewList();
 }
 
-void Stack::stackSize() {
-	this->stackList.ListSize();
+int Stack::stackSize() {
+	int size = this->stackList.ListSize();
+	return size;
 }
