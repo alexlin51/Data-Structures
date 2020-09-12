@@ -97,35 +97,24 @@ bool List::InsertNode(int data, int position) {
 		}
 		// case end
 		else if (inferedsize == listsize) {
-			current = head;
-			while (current->next != NULL) {
-				current = current->next;
-			}
-			//we are on the last entry
-			nodePtr n = new node;
-			n->data = data;
-			nodePtr traveler = current;
-			current = traveler->prev;
-			current->next = n;
-			n->prev = current;
-			n->next = traveler;
-			traveler->prev = n;
-			traveler = NULL;
+			AddEnd(data);
 		}
 		// case normal
 		else {
 			current = head;
 			nodePtr n = new node;
 			n->data = data;
-			for (int i = 0; i != position; i++) {
+			for (int i = 0; i != inferedsize; i++) {
 				current = current->next;
 			}
-			nodePtr traveler = current->prev;
-			traveler->next = n;
-			n->prev = traveler;
-			n->next = current;
-			current->prev = n;
+			nodePtr traveler = current;
+			traveler = traveler->next;
+			current->next = n;
+			n->prev = current;
+			traveler->prev = n;
+			n->next = traveler;
 			traveler = NULL;
+			delete traveler;
 		}
 		return true;
 		cout << "Position Added";
@@ -159,7 +148,7 @@ bool List::PullNode(int position) {
 			nodePtr delPtr = NULL;
 			nodePtr traveler = NULL;
 			current = head;
-			for (int i = 0; i != position; i++) {
+			for (int i = 0; i != inferedsize; i++) {
 				current = current->next;
 			}
 			delPtr = current;
