@@ -13,6 +13,9 @@ List::List() {
 
 int List::ListSize() {
 	int counter = 0;
+	if (head == NULL) {
+		return counter;
+	}
 	current = head;
 	if (current->next != NULL) {
 		counter = 1;
@@ -25,8 +28,12 @@ int List::ListSize() {
 	return counter;
 }
 
-int List::DataPos(int data) {
+int List::DataPos(string data) {
 	int counter = 0;
+	int empty = -1;
+	if (head == NULL) {
+		return empty;
+	}
 	current = head;
 	if (head != NULL) {
 		while (current->data != data) {
@@ -37,7 +44,7 @@ int List::DataPos(int data) {
 	return counter;
 }
 
-void List::AddEnd(int data) {
+void List::AddEnd(string data) {
 	nodePtr n = new node;
 	n->next = NULL;
 	n->data = data;
@@ -81,7 +88,7 @@ void List::DelEnd() {
 	}
 }
 
-bool List::InsertNode(int data, int position) {
+bool List::InsertNode(string data, int position) {
 	int listsize = ListSize();
 	int inferedsize = position + 1;
 	if (inferedsize <= listsize) {
@@ -128,10 +135,8 @@ bool List::InsertNode(int data, int position) {
 			traveler = NULL;
 		}
 		return true;
-		cout << "Position Added";
 	}
 	else {
-		cout << "Position not available";
 		return false;
 	}
 }
@@ -171,16 +176,17 @@ bool List::PullNode(int position) {
 			traveler = NULL;
 			delPtr = NULL;
 		}
-		cout << "Deleted position";
 		return true;
 	}
 	else {
-		cout << "Position not available";
 		return false;
 	}
 }
 
 void List::ViewList() {
+	if (head == NULL) {
+		return;
+	}
 	current = head;
 	while (current->next != NULL) {
 		cout << current->data;
@@ -188,4 +194,15 @@ void List::ViewList() {
 		current = current->next;
 	}
 	cout << current->data;
+}
+
+std::string List::Last() {
+	if (head == NULL) {
+		return "";
+	}
+	current = head;
+	while (current->next != NULL) {
+		current = current->next;
+	}
+	return current->data;
 }

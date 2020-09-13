@@ -1,25 +1,23 @@
 #include <iostream>
-#include "List.h"
+#include <sstream>
+#include <string>
+
+#include "isBounded.h"	
 
 using namespace std;
 
 int main() {
 
-	List test;
+	string test = "}{[]][())(";
 
-	test.AddEnd(1);
-	test.AddEnd(2);
-	test.AddEnd(3);
-	test.AddEnd(4);
-	test.AddEnd(5);
-	
-	//test.DelEnd();
-	//test.InsertNode();		Edge cases tested!
-	//test.PullNode();			Edge cases tested!
 
-	test.ViewList();
-	
-	cout << " | ";
-	cout << test.DataPos(3);
+	bool answer = isBounded(test);
+
+	if (answer == true) {
+		cout << "true";
+	}
+	else {
+		cout << "false";
+	}
 
 }
