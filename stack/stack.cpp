@@ -25,3 +25,7 @@ int Stack::stackSize() {
 	int size = this->stackList.ListSize();
 	return size;
 }
+
+std::string Stack::peek() {
+	return this->stackList.Last();
+}

@@ -13,6 +13,9 @@ List::List() {
 
 int List::ListSize() {
 	int counter = 0;
+	if (head == NULL) {
+		return counter;
+	}
 	current = head;
 	if (current->next != NULL) {
 		counter = 1;
@@ -27,6 +30,10 @@ int List::ListSize() {
 
 int List::DataPos(string data) {
 	int counter = 0;
+	int empty = -1;
+	if (head == NULL) {
+		return empty;
+	}
 	current = head;
 	if (head != NULL) {
 		while (current->data != data) {
@@ -177,6 +184,9 @@ bool List::PullNode(int position) {
 }
 
 void List::ViewList() {
+	if (head == NULL) {
+		return;
+	}
 	current = head;
 	while (current->next != NULL) {
 		cout << current->data;
@@ -184,4 +194,15 @@ void List::ViewList() {
 		current = current->next;
 	}
 	cout << current->data;
+}
+
+std::string List::Last() {
+	if (head == NULL) {
+		return "";
+	}
+	current = head;
+	while (current->next != NULL) {
+		current = current->next;
+	}
+	return current->data;
 }

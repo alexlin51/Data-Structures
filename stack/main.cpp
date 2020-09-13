@@ -1,12 +1,23 @@
 #include <iostream>
-#include <sstream>  
-#include "stack.h"
+#include <sstream>
+#include <string>
+
+#include "isBounded.h"	
 
 using namespace std;
 
 int main() {
-	
-	cout << "hi!";
 
+	string test = "}{[]][())(";
+
+
+	bool answer = isBounded(test);
+
+	if (answer == true) {
+		cout << "true";
+	}
+	else {
+		cout << "false";
+	}
 
 }
