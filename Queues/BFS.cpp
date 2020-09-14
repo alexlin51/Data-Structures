@@ -5,9 +5,9 @@
 
 using namespace std;
 
-void getPath(int* path, int connects[12][4], int start, int end) {
+void getPath(int* path, int connects[13][4], int start, int end) {
 
-	const int nodes = 12;
+	const int nodes = 13;
 
 	int prevList[nodes];
 	Queue algoQueue;

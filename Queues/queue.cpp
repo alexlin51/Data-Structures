@@ -34,7 +34,7 @@ int Queue::dequeue() {
 	int data = stackList.First();
 	this->stackList.PullNode(0);
 	return data;
-	
+
 }
 
 void Queue::showAll() {
