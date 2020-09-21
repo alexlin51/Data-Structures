@@ -14,19 +14,25 @@ private:
 		int height;
 		node* left;
 		node* right;
-		int bf;
 	};
 
+	int bf;
 	node* root;
 
 	node* createLeaf(int data);
 	int max(int a, int b);
-	void addEntry(int data, node* parent);
-	int findBalanceFactor(node *n);
-	
+	node* addEntry(int data, node* parent);
+	int findBalanceFactor(node* n);
+	node* rotateRight(node* point);
+	node* rotateLeft(node* point);
+	void printRecur(node* point);
+	int height(node* point);
+
 public:
 
 	balanceTree(std::vector<int> list);
+	void printOrder();
+	void add(int data);
 
 };
 
