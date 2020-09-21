@@ -19,8 +19,27 @@ int main() {
 	}
 
 	balanceTree plant(list);
+	plant.add(1);
 
 	plant.printOrder();
-	
-	
+
+	cout << endl;
+
+	cout << plant.findLargest() << " | " << plant.findSmallest() << endl;
+
+	bool contains = plant.contains(33);
+
+
+	if (contains) {
+		cout << "Does Exists!" << endl;
+	}
+	else {
+		cout << "Doesn't Exists!" << endl;
+	}
+
+	plant.remove(50);
+
+	plant.printOrder();
+
+
 }

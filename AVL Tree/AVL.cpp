@@ -66,7 +66,7 @@ balanceTree::node* balanceTree::addEntry(int data, node* point) {
 	if (point == NULL) {
 		return createLeaf(data);
 	}
-	
+
 	if (data < point->data) {
 		// traverse left side
 		point->left = addEntry(data, point->left);
@@ -115,7 +115,7 @@ balanceTree::node* balanceTree::addEntry(int data, node* point) {
 
 balanceTree::balanceTree(vector<int> list) {
 	root = NULL;
-
+	// we are able to keep this root like this because it will always return the root
 	for (int i = 0; i != list.size(); i++) {
 		root = addEntry(list[i], root);
 	}
@@ -137,4 +137,150 @@ void balanceTree::printOrder() {
 
 void balanceTree::add(int data) {
 	root = addEntry(data, root);
+}
+
+int balanceTree::smallest(node* pointer) {
+	while (pointer->left != NULL) {
+		return smallest(pointer->left);
+	}
+	return pointer->data;
+}
+
+int balanceTree::findSmallest() {
+	return smallest(root);
+}
+
+int balanceTree::largest(node* pointer) {
+	while (pointer->right != NULL) {
+		return largest(pointer->right);
+	}
+	return pointer->data;
+}
+
+int balanceTree::findLargest() {
+	return largest(root);
+}
+
+bool balanceTree::containsRecur(int data, node* point) {
+	if (point == NULL) {
+		return false;
+	}
+	
+	if (data < point->data) {
+		return containsRecur(data, point->left);
+	}
+	else if (data > point->data) {
+		return containsRecur(data, point->right);
+	}
+	else {
+		return true;
+	}
+
+}
+
+bool balanceTree::contains(int data) {
+	return containsRecur(data, root);
+}
+
+balanceTree::node* balanceTree::minValue(node* p) {
+	node* trav = p;
+
+	while (trav->left != NULL) {
+		trav = trav->left;
+	}
+
+	return trav;
+}
+
+balanceTree::node* balanceTree::deleteEntry(int data, node* point) {
+	if (point == NULL) {
+		return point;
+	}
+
+	if (data < point->data) {
+		//traverse left
+		point->left = deleteEntry(data, point->left);
+	}
+	else if (data > point->data) {
+		//travese right
+		point->right = deleteEntry(data, point->right);
+	}
+	else {
+		// this is the equal spot!
+		
+		// lets first check for a single child case or no child case
+		if (point->left == NULL || point->right == NULL) {
+			node* traveler;
+			if (point->left == NULL) {
+				traveler = point->right;
+			}
+			else {
+				traveler = point->left;
+			}
+
+			// if no children
+			if (traveler == NULL) {
+				traveler = point;
+				point = NULL;
+			}
+			else {
+				*point = *traveler;
+			}
+			free(traveler);
+
+		}
+		else {
+			// this is a double child case
+			node* traveler = minValue(point->right);
+			point->data = traveler->data;
+
+			point->right = deleteEntry(traveler->data, point->right);
+
+		}
+	}
+
+	if (point == NULL) {
+		return point;
+	}
+
+
+	// balancing portion, as this pulls out, things should balance out.
+	point->height = max(height(point->left), height(point->right)) + 1;
+	bf = findBalanceFactor(point);
+
+
+	// if portion for balance factor
+	if (bf > 1) {
+		// the left side if bigger
+		// we have 2 situtaions for both
+		if (findBalanceFactor(point->left) >= 0) {
+			//this is the case where Leftleft
+			return rotateRight(point);
+		}
+		else if (findBalanceFactor(point->left) < 0) {
+			// this is the left right case
+			point->left = rotateLeft(point->left);
+			return rotateRight(point);
+		}
+	}
+	if (bf < -1) {
+		// the right side of bigger
+		if (findBalanceFactor(point->right) <= 0) {
+			// this is the right right case
+			return rotateLeft(point);
+		}
+		else if (findBalanceFactor(point->right) > 0) {
+			// this is the right left case
+			point->right = rotateRight(point->right);
+			return rotateLeft(point);
+		}
+	}
+	return point;
+}
+
+void balanceTree::remove(int data) {
+	bool exists = contains(data);
+	if (exists) {
+		deleteEntry(data, root);
+	}
 }

@@ -27,12 +27,21 @@ private:
 	node* rotateLeft(node* point);
 	void printRecur(node* point);
 	int height(node* point);
+	int smallest(node* point);
+	int largest(node* point);
+	bool containsRecur(int data, node* point);
+	node* deleteEntry(int data, node* point);
+	node* minValue(node* p);
 
 public:
 
+	int findSmallest();
+	int findLargest();
 	balanceTree(std::vector<int> list);
 	void printOrder();
 	void add(int data);
+	bool contains(int data);
+	void remove(int data);
 
 };
 
